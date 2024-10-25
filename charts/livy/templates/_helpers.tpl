@@ -36,7 +36,7 @@ Create the name of the service account to use
 */}}
 {{- define "livy.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create -}}
-    {{ default (include "livy.fullname" .) .Values.serviceAccount.name }}
+    {{ default  .Values.serviceAccount.name }}
 {{- else -}}
     {{ default "default" .Values.serviceAccount.name }}
 {{- end -}}
@@ -47,8 +47,8 @@ Create the name of the service account to use by Spark Driver Pods
 */}}
 {{- define "livy.sparkServiceAccountName" -}}
 {{- if .Values.sparkServiceAccount.create -}}
-    {{ default (printf "%s-%s" (include "livy.fullname" .) "spark") .Values.sparkServiceAccount.name }}
+    {{ default .Values.sparkServiceAccount.name }}
 {{- else -}}
-    {{ default "default" .Values.sparkServiceAccount.name }}
+    {{ default "default" .Values.serviceAccount.name }}
 {{- end -}}
 {{- end -}}
